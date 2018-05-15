@@ -1,0 +1,36 @@
+* {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	font-weight: normal
+}
+html {
+	font-size: 20px;
+	background: #3b5998;
+	color: #fff
+}
+body {
+	padding: 30px
+}
+input, button {
+	padding: 5px;
+	border: 0;
+	background: #fff
+}
+.quotes {
+	border-top: 1px solid #fff
+}
+.quote {
+	margin-top: 10px
+}
+.quote > span:first-child:after {
+	content: ' :'
+}
+.quote_area {
+	margin-top: 10px;
+	padding-top: 10px;
+	border-top: 1px solid #8b9dc3
+}
+.quote_area h2 {
+	font-size: 16px
+}
