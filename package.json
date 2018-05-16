@@ -15,8 +15,8 @@
     "babel-watch": "^2.0.7"
   },
   "scripts": {
-    "start": "node_modules/.bin/concurrently \"npm run server\" \"npm run client\"",
-    "server": "node_modules/.bin/babel-watch server/basic_routing.js",
+    "start": "node_modules/.bin/concurrently -p \"[{name}]\" -n \"S,C\" -c \"bgGreen.bold,bgCyan.bold\" \"npm run server\" \"npm run client\"",
+    "server": "node_modules/.bin/babel-watch server/middleware_cookieparser.js",
     "client": "node_modules/.bin/babel-watch src/index.js"
   }
 }
