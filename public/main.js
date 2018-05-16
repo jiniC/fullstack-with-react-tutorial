@@ -80,7 +80,7 @@ var quoteView = (function($) {
 var quoteController = (function($, model, view){
   var self;
 
-  var _onModifyQuote = function(modifyname, modifyquote) {
+  var _onModifyQuote = function(e, modifyname, modifyquote) {
     model
       .modifyQuote(modifyname, modifyquote)
       .then(function(res) {
@@ -88,7 +88,7 @@ var quoteController = (function($, model, view){
       });
   };
 
-  var _onDeleteQuote = function(delname) {
+  var _onDeleteQuote = function(e, delname) {
     model
       .deleteQuote(delname)
       .then(function(res) {
