@@ -1,13 +1,16 @@
-const express = require('express')
+import express from 'express'
+import bodyParser from 'body-parser'
+import router from './router'
+
 const app = express()
-const bodyParser = require('body-parser')
+const PORT = 8080
 
 app.set('view engine', 'ejs')
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 app.use(express.static('public'))
-app.use('/', require('./router.js'))
+app.use('/', router)
 
-app.listen(8080, function(){
-  console.log('web server started');
+app.listen(PORT, () => {
+  console.log('web server started')
 });

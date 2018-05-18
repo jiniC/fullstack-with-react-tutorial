@@ -1,4 +1,5 @@
-const express = require('express');
+import express from 'express'
+
 const router = express.Router();
 const MongoClient = require('mongodb').MongoClient
 
@@ -47,4 +48,4 @@ router.delete('/quotes', (req, res) => {
   })
 })
 
-module.exports = router;
+export default router;
