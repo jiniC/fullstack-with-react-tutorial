@@ -1,9 +1,9 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const MongoClient = require('mongodb').MongoClient
 
-var db
-var url = 'mongodb://shlee1353:shlee1353@ds127443.mlab.com:27443/mongodb-tutorial';
+let db
+let url = 'mongodb://shlee1353:shlee1353@ds127443.mlab.com:27443/mongodb-tutorial';
 
 MongoClient.connect(url, (err, database) => {
   if (err) return console.log(err)
