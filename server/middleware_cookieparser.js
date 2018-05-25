@@ -11,9 +11,20 @@ app.get('/', (req, res) => {
   res.end('Set cookie')
 })
 
-app.get('/removeCookie', (req, res) => {
+app.get('/readcookie', (req, res) => {
+  const cookie = req.cookies.myCookie
+  res.send(`cookie: ${cookie}`)
+})
+
+app.get('/updatecookie', (req, res) => {
+  const new_value = 'very good'
+  res.cookie('myCookie', new_value)
+  res.send('myCookie is updated.')
+})
+
+app.get('/deletecookie', (req, res) => {
   res.clearCookie('myCookie')
-  res.end('Remove cookie')
+  res.end('myCookie is deleted.')
 })
 
 app.listen(PORT, () => {
