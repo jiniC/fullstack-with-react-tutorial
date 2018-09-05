@@ -1,50 +1,54 @@
 import express from 'express'
+import mongodb from 'mongodb'
+import assert from 'assert'
 
-const router = express.Router();
-const MongoClient = require('mongodb').MongoClient
+const router = express.Router()
+const MongoClient = mongodb.MongoClient
 
-let db
-let url = 'mongodb://shlee1353:shlee1353@ds127443.mlab.com:27443/mongodb-tutorial';
+const url = 'mongodb://shlee1353:shlee1353@ds127443.mlab.com:27443/mongodb-tutorial';
+const dbName = 'mongodb-tutorial'
 
-MongoClient.connect(url, (err, database) => {
-  if (err) return console.log(err)
-  db = database
-})
+MongoClient.connect(url, { useNewUrlParser: true }, (err, client) => {
+  assert.equal(null, err)
 
-router.get('/', (req, res) => {
-  db.collection('quotes').find().toArray((err, result) => {
-    if (err) return console.log(err)
-    res.render('index.ejs', {quotes: result})
+  const db = client.db(dbName)
+  const collection = db.collection('quotes')
+
+  router.get('/', (req, res) => {
+    collection.find({}).toArray((err, result) => {
+      if (err) return console.log(err)
+      res.render('index.ejs', {quotes: result})
+    })
   })
-})
 
-router.post('/quotes', (req, res) => {
-  db.collection('quotes').save(req.body, (err, result) => {
-    if (err) return console.log(err)
-    res.redirect('/')
+  router.post('/quotes', (req, res) => {
+    collection.insertOne(req.body, (err, result) => {
+      if (err) return console.log(err)
+      res.redirect('/')
+    })
   })
-})
 
-router.put('/quotes', (req, res) => {
-  db.collection('quotes')
-  .findOneAndUpdate({name: req.body.name}, {
-    $set: {
-      name: req.body.name,
-      quote: req.body.quote
-    }
-  }, {
-    sort: {_id: -1},
-    upsert: true
-  }, (err, result) => {
-    if (err) return res.send(500, err)
-    res.send({result: 'success'})
+  router.put('/quotes', (req, res) => {
+    collection
+    .findOneAndUpdate({name: req.body.name}, {
+      $set: {
+        name: req.body.name,
+        quote: req.body.quote
+      }
+    }, {
+      sort: {_id: -1},
+      upsert: true
+    }, (err, result) => {
+      if (err) return res.send(500, err)
+      res.send({result: 'success'})
+    })
   })
-})
 
-router.delete('/quotes', (req, res) => {
-  db.collection('quotes').remove({name: req.body.name }, (err, result) => {
-    if (err) return res.send(500, err)
-    res.send({result: 'success'})
+  router.delete('/quotes', (req, res) => {
+    collection.deleteOne({name: req.body.name }, (err, result) => {
+      if (err) return res.send(500, err)
+      res.send({result: 'success'})
+    })
   })
 })
 
