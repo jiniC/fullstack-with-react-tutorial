@@ -19,20 +19,3 @@
 12. db.users.update({name:’소녀시대’},{$set:{name:’bts’}})
 13. db.users.remove({name:’bts’})
 14. db.users.drop()
-
-## 4_MongoDB — MongoDB - CRUD in Express routes
-
-1. git clone `https://github.com/STUDY-FULLSTACK/fullstack-with-react-tutorial.git`
-2. cd fullstack-with-react-tutorial
-3. git checkout 3_mongoDB
-4. npm install
-5. npm run start
-6. http://localhost:3000/public/login.html
-7. db.users.insert({id:’test01’,password:’1234’,name:’bts’})
-8. 사용자인증함수 -> 라우터
-9. http://localhost:3000/public/adduser.html
-10. 사용자추가함수 -> 라우터
-11. db.users.find().pretty()
-12. git checkout 4_mongoDB_CRUD
-13. http://localhost:8080/
-
